@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-header">MASTER DATA</li>
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link">
+                    <a href="/master-data/satuan" class="nav-link <?= $page == 'satuan' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-balance-scale"></i>
                         <p>
                             Satuan
