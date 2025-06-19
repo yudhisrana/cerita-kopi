@@ -11,7 +11,7 @@ class Dashboard extends BaseController
     {
         $data = [
             'page'  => 'dashboard',
-            'title' => 'Dashboard',
+            'title' => 'Cerita Kopi - Dashboard',
         ];
         return view('dashboard', $data);
     }
