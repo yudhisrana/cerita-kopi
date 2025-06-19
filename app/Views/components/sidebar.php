@@ -1,5 +1,5 @@
 <?php $user = session()->get(); ?>
-<aside class="main-sidebar sidebar-dark-info elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
         <img src="/assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -22,6 +22,22 @@
                     </a>
                 </li>
                 <li class="nav-header">MASTER DATA</li>
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">
+                        <i class="nav-icon fas fa-balance-scale"></i>
+                        <p>
+                            Satuan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            Kategori
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
