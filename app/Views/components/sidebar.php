@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link">
+                    <a href="/master-data/kategori" class="nav-link <?= $page == 'kategori' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             Kategori

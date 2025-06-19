@@ -68,7 +68,7 @@ class Satuan extends BaseController
         $data = [
             'page'      => 'satuan',
             'title'     => 'Cerita Kopi - Satuan',
-            'form_name' => 'Form tambah data satuan',
+            'form_name' => 'Form edit data satuan',
             'satuan'    => $result['data'],
         ];
         return view('satuan/edit', $data);

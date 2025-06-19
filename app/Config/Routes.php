@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\Dashboard;
+use App\Controllers\Kategori;
 use App\Controllers\Satuan;
 use CodeIgniter\Router\RouteCollection;
 
@@ -22,3 +23,11 @@ $routes->post('/master-data/satuan/store', [Satuan::class, 'store']);
 $routes->get('/master-data/satuan/edit/(:num)', [Satuan::class, 'edit']);
 $routes->post('/master-data/satuan/update/(:num)', [Satuan::class, 'update']);
 $routes->post('/master-data/satuan/delete/(:num)', [Satuan::class, 'destroy']);
+
+// master data kategori
+$routes->get('/master-data/kategori', [Kategori::class, 'index']);
+$routes->get('/master-data/kategori/create', [Kategori::class, 'create']);
+$routes->post('/master-data/kategori/store', [Kategori::class, 'store']);
+$routes->get('/master-data/kategori/edit/(:num)', [Kategori::class, 'edit']);
+$routes->post('/master-data/kategori/update/(:num)', [Kategori::class, 'update']);
+$routes->post('/master-data/kategori/delete/(:num)', [Kategori::class, 'destroy']);
