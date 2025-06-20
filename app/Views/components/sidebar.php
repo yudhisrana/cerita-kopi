@@ -23,10 +23,10 @@
                 </li>
                 <li class="nav-header">MASTER DATA</li>
                 <li class="nav-item">
-                    <a href="/master-data/satuan" class="nav-link <?= $page == 'satuan' ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-balance-scale"></i>
+                    <a href="/master-data/produk" class="nav-link <?= $page == 'produk' ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-coffee"></i>
                         <p>
-                            Satuan
+                            Produk
                         </p>
                     </a>
                 </li>
@@ -35,6 +35,14 @@
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             Kategori
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/master-data/satuan" class="nav-link <?= $page == 'satuan' ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-balance-scale"></i>
+                        <p>
+                            Satuan
                         </p>
                     </a>
                 </li>
