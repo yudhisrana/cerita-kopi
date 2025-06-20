@@ -14,16 +14,16 @@
         <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown">
                 <img src="/assets/img/default-profile.png" class="img-circle elevation-2" alt="User Image" width="30" height="30">
-                <span class="ml-2">Admin</span>
+                <span class="ml-2"><?= $user['name'] ?></span>
             </a>
-            <!-- <div class="dropdown-menu dropdown-menu-right mt-1">
+            <div class="dropdown-menu dropdown-menu-right mt-1">
                 <form action="/logout" method="post" class="px-4 py-2">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn btn-danger btn-block">
                         <i class="fas fa-sign-out-alt mr-2"></i> Logout
                     </button>
                 </form>
-            </div> -->
+            </div>
         </li>
     </ul>
 </nav>
