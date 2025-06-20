@@ -5,6 +5,7 @@ namespace Config;
 use App\Validation\Kategori;
 use App\Validation\Produk;
 use App\Validation\Satuan;
+use App\Validation\User;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Validation\StrictRules\CreditCardRules;
 use CodeIgniter\Validation\StrictRules\FileRules;
@@ -31,6 +32,7 @@ class Validation extends BaseConfig
         Satuan::class,
         Kategori::class,
         Produk::class,
+        User::class,
     ];
 
     /**

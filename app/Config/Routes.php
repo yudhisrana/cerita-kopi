@@ -4,6 +4,7 @@ use App\Controllers\Dashboard;
 use App\Controllers\Kategori;
 use App\Controllers\Produk;
 use App\Controllers\Satuan;
+use App\Controllers\User;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -40,3 +41,11 @@ $routes->post('/master-data/satuan/store', [Satuan::class, 'store']);
 $routes->get('/master-data/satuan/edit/(:num)', [Satuan::class, 'edit']);
 $routes->post('/master-data/satuan/update/(:num)', [Satuan::class, 'update']);
 $routes->post('/master-data/satuan/delete/(:num)', [Satuan::class, 'destroy']);
+
+// setting user
+$routes->get('/setting/user', [User::class, 'index']);
+$routes->get('/setting/user/create', [User::class, 'create']);
+$routes->post('/setting/user/store', [User::class, 'store']);
+$routes->get('/setting/user/edit/(:hash)', [User::class, 'edit']);
+$routes->post('/setting/user/update/(:hash)', [User::class, 'update']);
+$routes->post('/setting/user/delete/(:hash)', [User::class, 'destroy']);
