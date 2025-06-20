@@ -109,6 +109,7 @@
                         <h3 class="card-title">Daftar Item</h3>
                     </div>
                     <div class="card-body">
+                        <?php $cart = session()->get('kasir_cart') ?? []; ?>
                         <table class="table table-striped m-0">
                             <thead class="thead-light">
                                 <tr>
@@ -120,14 +121,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Americano</td>
-                                    <td>Rp 15.000</td>
-                                    <td>2</td>
-                                    <td>Rp 30.000</td>
-                                    <td><button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Tambahkan data dinamis dari session/cart -->
+                                <?php foreach ($cart as $item) { ?>
+                                    <tr>
+                                        <td><?= esc($item['nama']) ?></td>
+                                        <td>Rp <?= number_format($item['harga'], 0, ',', '.') ?></td>
+                                        <td><?= $item['jumlah'] ?></td>
+                                        <td>Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
+                                        <td>
+                                            <form action="/menu/kasir/remove" method="post" style="display:inline">
+                                                <?= csrf_field() ?>
+                                                <input type="hidden" name="produk_id" value="<?= $item['id'] ?>">
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -145,7 +155,14 @@
                             <?= csrf_field(); ?>
                             <div class="form-group">
                                 <label for="produk">Produk</label>
-                                <input type="text" name="produk" id="produk" class="form-control" placeholder="Cari atau scan barcode" autofocus />
+                                <select class="form-control" name="produk" id="produk">
+                                    <option value="" selected disabled>Pilih produk</option>
+                                    <?php foreach ($produk as $produk) { ?>
+                                        <option value="<?= $produk->id ?>">
+                                            <?= $produk->nama_produk ?> - [ jumlah stok <?= $produk->stok ?> ]
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="jumlah">Jumlah</label>
@@ -158,13 +175,54 @@
 
                         <hr />
 
-                        <h5>Total: <strong>Rp 30.000</strong></h5>
-                        <form action="/menu/kasir/checkout" method="post">
-                            <?= csrf_field(); ?>
-                            <button class="btn btn-primary btn-block mt-2">
-                                <i class="fas fa-money-bill-wave"></i> Bayar
-                            </button>
-                        </form>
+                        <?php
+                        $total = array_sum(array_column($cart, 'subtotal'));
+                        $ppnPercent = 0; // default value
+                        $ppn = ($ppnPercent / 100) * $total;
+                        $diskon = 0;
+                        $grandTotal = $total + $ppn - $diskon;
+                        ?>
+
+                        <div class="container-fluid px-2">
+                            <form action="/menu/kasir/checkout" method="post">
+                                <?= csrf_field(); ?>
+
+                                <dl class="row mb-0">
+                                    <dt class="col-6">Total</dt>
+                                    <dd class="col-6 text-right">Rp <?= number_format($total, 0, ',', '.') ?></dd>
+
+                                    <dt class="col-6">PPN (%)</dt>
+                                    <dd class="col-6 text-right">
+                                        <input type="number" id="ppn_percent" name="ppn_percent" class="form-control form-control-sm text-right" min="0" value="<?= $ppnPercent ?>">
+                                    </dd>
+
+                                    <dt class="col-6">Diskon (Rp)</dt>
+                                    <dd class="col-6 text-right">
+                                        <input type="number" id="diskon" name="diskon" class="form-control form-control-sm text-right" min="0" value="0">
+                                    </dd>
+
+                                    <hr class="col-12 my-2" />
+
+                                    <dt class="col-6 font-weight-bold">Grand Total</dt>
+                                    <dd class="col-6 text-right font-weight-bold text-primary" id="grandTotalDisplay">
+                                        Rp <?= number_format($grandTotal, 0, ',', '.') ?>
+                                    </dd>
+                                </dl>
+
+                                <input type="hidden" name="grand_total" id="inputGrandTotal" value="<?= $grandTotal ?>">
+                                <input type="hidden" name="ppn" id="inputPPN" value="<?= $ppn ?>">
+                                <input type="hidden" name="metode_pembayaran" id="metodePembayaranInput">
+
+                                <?php $cart = session()->get('kasir_cart') ?? []; ?>
+                                <button type="button"
+                                    id="btnCheckout"
+                                    class="btn btn-primary btn-block mt-3"
+                                    <?= empty($cart) ? 'disabled title="Cart masih kosong"' : '' ?>>
+                                    <i class="fas fa-money-bill-wave"></i> Bayar
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -178,6 +236,67 @@
     <script src="/assets/js/adminlte.js"></script>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const total = <?= $total ?>;
+
+            const ppnPercentInput = document.getElementById("ppn_percent");
+            const diskonInput = document.getElementById("diskon");
+            const grandTotalDisplay = document.getElementById("grandTotalDisplay");
+            const inputGrandTotal = document.getElementById("inputGrandTotal");
+            const inputPPN = document.getElementById("inputPPN");
+
+            function updateGrandTotal() {
+                const ppnPercent = parseFloat(ppnPercentInput.value) || 0;
+                const diskon = parseInt(diskonInput.value) || 0;
+
+                const ppn = (ppnPercent / 100) * total;
+                const grandTotal = total + ppn - diskon;
+
+                grandTotalDisplay.textContent = formatRupiah(grandTotal);
+                inputGrandTotal.value = grandTotal;
+                inputPPN.value = ppn;
+            }
+
+            function formatRupiah(number) {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(number);
+            }
+
+            ppnPercentInput.addEventListener("input", updateGrandTotal);
+            diskonInput.addEventListener("input", updateGrandTotal);
+            updateGrandTotal();
+        });
+
+        document.getElementById("btnCheckout").addEventListener("click", function() {
+            Swal.fire({
+                title: 'Pilih Metode Pembayaran',
+                input: 'select',
+                inputOptions: {
+                    cash: 'Cash',
+                    transfer: 'Transfer'
+                },
+                inputPlaceholder: 'Pilih metode',
+                showCancelButton: true,
+                confirmButtonColor: "#c67c4e",
+                confirmButtonText: 'Lanjut Bayar',
+                cancelButtonColor: "#5A6268",
+                cancelButtonText: 'Batal',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Silakan pilih metode pembayaran!'
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('metodePembayaranInput').value = result.value;
+                    document.querySelector('form[action="/menu/kasir/checkout"]').submit();
+                }
+            });
+        });
+
         <?php if (session()->getFlashdata('success')) { ?>
             Swal.fire({
                 icon: 'success',

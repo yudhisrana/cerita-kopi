@@ -138,14 +138,10 @@
                     },
                     {
                         targets: 8,
-                        searchable: true,
-                    },
-                    {
-                        targets: 9,
                         searchable: false,
                         orderable: false,
                         className: 'text-center'
-                    }
+                    },
                 ]
             })
     });

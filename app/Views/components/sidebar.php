@@ -57,7 +57,7 @@
                 </li>
                 <li class="nav-header">LAPORAN</li>
                 <li class="nav-item">
-                    <a href="/laporan/penjualan" class="nav-link">
+                    <a href="/laporan/penjualan" class="nav-link <?= $page == 'penjualan' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
                             Laporan Penjualan

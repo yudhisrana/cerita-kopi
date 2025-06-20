@@ -32,4 +32,9 @@ class Produk extends Model
             ->join('tbl_satuan', 'tbl_satuan.id = tbl_produk.satuan_id')
             ->findAll();
     }
+
+    public function findAllDataWithStokReady()
+    {
+        return $this->where('stok >', '0')->findAll();
+    }
 }

@@ -17244,7 +17244,7 @@ body.text-sm .control-sidebar {
 	background-color: #f8f9fa;
 }
 .navbar-dark {
-	background-color: #343a40;
+	background-color: #181818 !important;
 	border-color: #4b545c;
 }
 .navbar-primary {

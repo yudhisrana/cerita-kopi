@@ -4,6 +4,7 @@ use App\Controllers\Auth;
 use App\Controllers\Dashboard;
 use App\Controllers\Kasir;
 use App\Controllers\Kategori;
+use App\Controllers\Penjualan;
 use App\Controllers\Produk;
 use App\Controllers\Satuan;
 use App\Controllers\User;
@@ -60,10 +61,16 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         $routes->get('/setting/user/edit/(:hash)', [User::class, 'edit']);
         $routes->post('/setting/user/update/(:hash)', [User::class, 'update']);
         $routes->post('/setting/user/delete/(:hash)', [User::class, 'destroy']);
+
+        // laporan penjualan
+        $routes->get('/laporan/penjualan', [Penjualan::class, 'index']);
     });
 
     // menu kasir
     $routes->get('/menu/kasir', [Kasir::class, 'index']);
+    $routes->post('/menu/kasir/add', [Kasir::class, 'add']);
+    $routes->post('/menu/kasir/remove', [Kasir::class, 'remove']);
+    $routes->post('/menu/kasir/checkout', [Kasir::class, 'checkout']);
 
     // logout
     $routes->post('/logout', [Auth::class, 'attemptLogout']);
