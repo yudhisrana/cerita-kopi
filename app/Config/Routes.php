@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\Dashboard;
+use App\Controllers\Kasir;
 use App\Controllers\Kategori;
 use App\Controllers\Produk;
 use App\Controllers\Satuan;
@@ -41,6 +42,9 @@ $routes->post('/master-data/satuan/store', [Satuan::class, 'store']);
 $routes->get('/master-data/satuan/edit/(:num)', [Satuan::class, 'edit']);
 $routes->post('/master-data/satuan/update/(:num)', [Satuan::class, 'update']);
 $routes->post('/master-data/satuan/delete/(:num)', [Satuan::class, 'destroy']);
+
+// menu kasir
+$routes->get('/menu/kasir', [Kasir::class, 'index']);
 
 // setting user
 $routes->get('/setting/user', [User::class, 'index']);

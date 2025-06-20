@@ -46,6 +46,24 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">MENU</li>
+                <li class="nav-item">
+                    <a href="/menu/kasir" target="_blank" class="nav-link">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>
+                            Kasir
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">LAPORAN</li>
+                <li class="nav-item">
+                    <a href="/laporan/penjualan" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            Laporan Penjualan
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">SETTING</li>
                 <li class="nav-item">
                     <a href="/setting/user" class="nav-link <?= $page == 'user' ? 'active' : '' ?>">
