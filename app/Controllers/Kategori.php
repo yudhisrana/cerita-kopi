@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Services\Kategori as ServicesKategori;
 use App\Validation\Kategori as ValidationKategori;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Services;
 
 class Kategori extends BaseController
 {
@@ -44,7 +45,7 @@ class Kategori extends BaseController
     {
         $rules = $this->ruleValidation->ruleStore();
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+            return redirect()->back()->withInput()->with('validation', Services::validation());
         }
 
         $data = [
@@ -78,7 +79,7 @@ class Kategori extends BaseController
     {
         $rules = $this->ruleValidation->ruleUpdate($id);
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+            return redirect()->back()->withInput()->with('validation', Services::validation());
         }
 
         $data = [

@@ -25,14 +25,14 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <?php $validation = session()->getFlashdata('validation') ?>
+                            <?php $validation = session()->getFlashdata('validation') ?? \Config\Services::validation() ?>
                             <form action="/master-data/satuan/store" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="form-group">
                                     <label for="satuan">Satuan</label>
-                                    <input type="text" class="form-control <?= $validation && $validation['satuan'] ? 'is-invalid' : '' ?>" id="satuan" name="satuan" placeholder="Nama satuan" value="<?= old('satuan') ?>">
+                                    <input type="text" class="form-control <?= $validation->hasError('satuan') ? 'is-invalid' : '' ?>" id="satuan" name="satuan" placeholder="Nama satuan" value="<?= old('satuan') ?>">
                                     <span id="satuan-error" class="error invalid-feedback">
-                                        <?= $validation['satuan'] ?? '' ?>
+                                        <?= $validation->getError('satuan') ?>
                                     </span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-end">

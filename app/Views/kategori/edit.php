@@ -25,14 +25,14 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <?php $validation = session()->getFlashdata('validation') ?>
+                            <?php $validation = session()->getFlashdata('validation') ?? \Config\Services::validation() ?>
                             <form action="<?= '/master-data/kategori/update/' . $kategori->id; ?>" method="post">
                                 <?= csrf_field(); ?>
                                 <div class="form-group">
                                     <label for="kategori">Kategori</label>
-                                    <input type="text" class="form-control <?= $validation && $validation['kategori'] ? 'is-invalid' : '' ?>" id="kategori" name="kategori" placeholder="Nama kategori" value="<?= old('kategori', $kategori->nama_kategori) ?>">
+                                    <input type="text" class="form-control <?= $validation->hasError('kategori') ? 'is-invalid' : '' ?>" id="kategori" name="kategori" placeholder="Nama kategori" value="<?= old('kategori', $kategori->nama_kategori) ?>">
                                     <span id="kategori-error" class="error invalid-feedback">
-                                        <?= $validation['kategori'] ?? '' ?>
+                                        <?= $validation->getError('kategori') ?>
                                     </span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-end">
