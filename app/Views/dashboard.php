@@ -15,50 +15,54 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <p>Event Berjalan</p>
+                            <h3><?= $dashboard_summary['transaksiHariIni'] ?></h3>
+                            <p>Transaksi Hari Ini</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-android-calendar"></i>
+                            <i class="fas fa-receipt"></i>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <p>Event Selesai</p>
+                            <h3>Rp <?= number_format($dashboard_summary['pendapatanHariIni'], 0, ',', '.') ?></h3>
+                            <p>Total Pendapatan Hari Ini</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-android-calendar"></i>
+                            <i class="fas fa-money-bill-wave"></i>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <p>Event Gagal</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-android-calendar"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <p>Total Pendaftar</p>
+                            <h3><?= $dashboard_summary['produkTerjualHariIni'] ?></h3>
+                            <p>Produk Terjual Hari Ini</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3><?= $dashboard_summary['StokHabis'] ?></h3>
+                            <p>Stok Habis</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-exclamation-triangle"></i>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </div>
