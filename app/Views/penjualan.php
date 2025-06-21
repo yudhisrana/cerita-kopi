@@ -52,6 +52,7 @@
                                         <th>Nama Produk</th>
                                         <th>Jumlah Terjual</th>
                                         <th>Total Pendapatan</th>
+                                        <th>Nama Kasir</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
@@ -62,6 +63,7 @@
                                             <td><?= esc($value->nama_produk); ?></td>
                                             <td><?= esc($value->total_terjual); ?></td>
                                             <td>Rp <?= number_format($value->total_pendapatan, 0, ',', '.') ?></td>
+                                            <td><?= esc($value->kasir); ?></td>
                                             <td><?= date('d-m-Y', strtotime($value->tanggal)) ?></td>
                                         </tr>
                                     <?php } ?>
@@ -114,9 +116,11 @@
                     },
                     {
                         targets: 4,
-                        searchable: false,
-                        orderable: false,
-                        className: 'text-center'
+                        searchable: true,
+                    },
+                    {
+                        targets: 4,
+                        searchable: true,
                     }
                 ]
             })

@@ -27,11 +27,13 @@ class PenjualanDetail extends Model
             DATE(tbl_penjualan.created_at) as tanggal,
             tbl_produk.nama_produk,
             SUM(tbl_penjualan_detail.jumlah) as total_terjual,
-            SUM(tbl_penjualan_detail.sub_total) as total_pendapatan
+            SUM(tbl_penjualan_detail.sub_total) as total_pendapatan,
+            tbl_user.nama_lengkap as kasir
         ")
             ->join('tbl_produk', 'tbl_produk.id = tbl_penjualan_detail.produk_id')
             ->join('tbl_penjualan', 'tbl_penjualan.id = tbl_penjualan_detail.penjualan_id')
-            ->groupBy('tanggal, tbl_produk.id')
+            ->join('tbl_user', 'tbl_user.id = tbl_penjualan.created_by')
+            ->groupBy('tanggal, tbl_produk.id, tbl_penjualan.created_by')
             ->orderBy('tanggal', 'DESC');
 
         if ($start && $end) {

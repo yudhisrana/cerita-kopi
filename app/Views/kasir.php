@@ -8,6 +8,7 @@
     <link rel="icon" href="<?= base_url('assets/img/logo.jpg'); ?>" type="image/gif" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/plugins/sweetalert2/sweetalert2.min.css" />
     <link rel="stylesheet" href="/assets/css/adminlte.min.css" />
 
@@ -156,7 +157,7 @@
                             <div class="form-group">
                                 <label for="produk">Produk</label>
                                 <select class="form-control" name="produk" id="produk">
-                                    <option value="" selected disabled>Pilih produk</option>
+                                    <option></option>
                                     <?php foreach ($produk as $produk) { ?>
                                         <option value="<?= $produk->id ?>">
                                             <?= $produk->nama_produk ?> - [ jumlah stok <?= $produk->stok ?> ]
@@ -231,11 +232,22 @@
 
     <!-- Scripts -->
     <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/plugins/select2/js/select2.min.js"></script>
     <script src="/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/adminlte.js"></script>
 
     <script>
+        $(function() {
+            $('#produk').select2({
+                placeholder: {
+                    id: '',
+                    text: 'Pilih Produk'
+                },
+                allowClear: true
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             const total = <?= $total ?>;
 

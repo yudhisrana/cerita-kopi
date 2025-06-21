@@ -17,7 +17,7 @@ class Auth extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'SwimUp - Login',
+            'title' => 'Cerita Kopi - Login',
         ];
         return view('login', $data);
     }
